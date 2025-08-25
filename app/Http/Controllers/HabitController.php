@@ -23,7 +23,8 @@ class HabitController extends Controller
 
     public function store(StoreHabitRequest $request)
     {
-        $data = $request->validate();
+        // $data = $request->validate();
+        $data = $request->only(['title', 'uuid']);
 
         $habit = Habit::create($data);
 
