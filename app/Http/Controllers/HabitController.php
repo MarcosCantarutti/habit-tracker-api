@@ -8,6 +8,14 @@ use App\Models\Habit;
 
 class HabitController extends Controller
 {
+
+    public function index()
+    {
+        $habits = Habit::all();
+
+        return HabitResource::collection($habits);
+    }
+
     public function store(StoreHabitRequest $request)
     {
         $data = $request->validate();
