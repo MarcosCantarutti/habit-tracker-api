@@ -19,8 +19,9 @@ class HabitResource extends JsonResource
             'title' => $this->title,
             'user' => UserResource::make($this->whenLoaded('user')),
             'logs' => HabitLogResource::collection($this->whenLoaded('logs')),
-            'meta' => [
-                'link' => route('api.habits.show', $this->uuid)
+            'links' => [
+                'self' => route('api.habits.show', $this),
+                'logs' => route('api.habits.logs.index', $this)
             ],
             // 'user'
         ];
