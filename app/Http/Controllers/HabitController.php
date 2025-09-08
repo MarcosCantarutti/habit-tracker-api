@@ -19,7 +19,8 @@ class HabitController extends Controller
                 ->contains('user'), fn($query) => $query->with('user'))
             ->when(str(request()->string('with', ''))
                 ->contains('logs'), fn($query) => $query->withCount('logs'))
-            ->get();
+            // ->get()
+            ->paginate();
 
         return HabitResource::collection($habits);
     }
