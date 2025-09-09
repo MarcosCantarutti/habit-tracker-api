@@ -27,13 +27,13 @@ class StoreHabitRequest extends FormRequest
         ];
     }
 
-    /**
-     * Handle a passed validation attempt.
-     *
-     * @return void
-     */
-    protected function passedValidation(): void
-    {
-        $this->merge(['uuid' => Str::uuid()]);
-    }
+    // /**
+    //  * Handle a passed validation attempt.
+    //  *
+    //  * @return void
+    //  */
+    // protected function passedValidation(): void
+    // {
+    //     $this->merge(['uuid' => Str::uuid()]);
+    // }
 }

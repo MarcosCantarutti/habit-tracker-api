@@ -28,13 +28,14 @@ class StoreHabitLogRequest extends FormRequest
         ];
     }
 
-    /**
-     * Handle a passed validation attempt.
-     *
-     * @return void
-     */
-    protected function passedValidation(): void
-    {
-        $this->merge(['uuid' => Str::uuid()]);
-    }
+    // vai ficar no HabitLog.php
+    // /**
+    //  * Handle a passed validation attempt.
+    //  *
+    //  * @return void
+    //  */
+    // protected function passedValidation(): void
+    // {
+    //     $this->merge(['uuid' => Str::uuid()]);
+    // }
 }
