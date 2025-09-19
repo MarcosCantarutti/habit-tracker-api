@@ -1,12 +1,10 @@
 <x-mail::message>
-# Introduction
+# Weekly Report
 
-The body of your message.
+Here is the weekly report for this week.
 
 <x-mail::table>
-
-    {{ $map }}
-
+{{ $map }}
 </x-mail::table>
 
 Thanks,<br>
