@@ -1,10 +1,11 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Providers;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,5 +25,18 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Model::unguard(); // config
+
+        Password::defaults(function () {
+            if (app()->isProduction()) {
+                return Password::min(8)
+                    ->mixedCase()
+                    ->letters()
+                    ->numbers()
+                    ->symbols()
+                    ->uncompromised();
+            }
+
+            return Password::min(8);
+        });
     }
 }
