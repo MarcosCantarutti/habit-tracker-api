@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Notifications\WeeklyReport;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 class WeeklyCommand extends Command
@@ -30,7 +31,16 @@ class WeeklyCommand extends Command
     public function handle()
     {
 
-        $user = User::first();
+        foreach (User::all() as $user) {
+
+            $user->notify(
+                new WeeklyReport($this->getHabits($user))
+            );
+        }
+    }
+
+    public function getHabits(User $user): Collection
+    {
 
         $query =
             "
@@ -54,7 +64,7 @@ class WeeklyCommand extends Command
             order by h.id, c.log_date
         ";
 
-        $habits = collect(DB::select($query, [$user->id]))
+        return collect(DB::select($query, [$user->id]))
             ->map(function ($item) {
 
                 return (object) [
@@ -64,11 +74,5 @@ class WeeklyCommand extends Command
                     'completed' => (bool) $item->completed
                 ];
             });
-
-        $user->notify(
-
-            new WeeklyReport($habits)
-
-        );
     }
 }
