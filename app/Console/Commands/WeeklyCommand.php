@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Models\User;
+use App\Notifications\WeeklyReport;
 use Illuminate\Console\Command;
 
 class WeeklyCommand extends Command
@@ -26,6 +28,12 @@ class WeeklyCommand extends Command
     public function handle()
     {
 
-        echo 'Weekly report send to the user';
+        $user = User::first();
+
+        $user->notify(
+
+            new WeeklyReport
+
+        );
     }
 }
