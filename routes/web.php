@@ -8,5 +8,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', fn(): array => [config('app.name')]);
 
 Route::middleware('guest')->group(function (): void {
+    Route::post('/api/login', [AuthController::class, 'login']);
     Route::post('/api/register', [AuthController::class, 'register']);
 });
