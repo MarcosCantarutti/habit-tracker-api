@@ -11,8 +11,11 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 
-Route::apiResource('habits', HabitController::class)->scoped(['habit' => 'uuid']);
+Route::name('api.')->middleware('auth:sanctum')->group(function (): void {
 
-Route::apiResource('habits.logs', HabitLogController::class)
-    ->only(['index', 'show', 'store', 'destroy'])
-    ->scoped(['habit' => 'uuid', 'log' => 'uuid']);
+    Route::apiResource('habits', HabitController::class)->scoped(['habit' => 'uuid']);
+
+    Route::apiResource('habits.logs', HabitLogController::class)
+        ->only(['index', 'show', 'store', 'destroy'])
+        ->scoped(['habit' => 'uuid', 'log' => 'uuid']);
+});
